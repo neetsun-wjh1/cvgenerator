@@ -13,8 +13,8 @@ class Config:
     HUMAN_MESSAGE_TEMPLATE = """For Profile {name} from country {countryName}{designation}, generate the CV content below: \n
     {sectionInstructions} \n
     Generate the output in following sample format: \n {output_format} \n
-    Your output should contain only the requested JSON structure with accurate information gathered through web search without any additional commentary.
+    Your output should contain only the requested JSON structure with accurate information.  Do not include any comments.
     Language of output is strictly English,so please translate into accurate English if output is of another language.
     """
-    TAVILY_MAXSEARCH=5
+    TAVILY_MAXSEARCH=7
     TAVILY_SEARCHTOPIC="general"

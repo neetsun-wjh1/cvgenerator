@@ -203,8 +203,10 @@ def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=None, model_na
     """
     model = ChatOpenAI(
         api_key=api_key,
-        openai_api_base=api_base or "https://litellm.govtext.gov.sg/",
+        # openai_api_base=api_base or "https://litellm.govtext.gov.sg/",
+        openai_api_base=api_base or "https://llmaas.govtext.gov.sg/gateway",
         model=model_name or "gpt-4o-mini-prd-gcc2-lb",
+        temperature=0
     )
     
     if tools:
@@ -385,7 +387,7 @@ def create_graph():
     print("Initialize Chat Model")
     model_with_tools = initialize_chat_model(
         api_key=LLMAAS_OPENAI_API_KEY,
-        tools=[tavily_search_tool, tavily_extract_tool]
+        tools=[tavily_search_tool]
     )
     
     # 3. Create system message

@@ -1,0 +1,145 @@
+{
+    "TransactionId": "981221",
+    "InfoSectionList": [
+        {
+            "label": "Main Particulars",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Name",
+                    "value": "Cho Tae-yul",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Designation",
+                    "value": "Minister of Foreign Affairs",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Country",
+                    "value": "South Korea",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Birth Date",
+                    "value": "29 Aug 1956",
+                    "type": "DTT"
+                },
+                {
+                    "name": "Marital Status",
+                    "value": "Married, with 2 children (1 son, 1 daughter)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Education",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "LL.B.",
+                    "value": "Seoul National University, South Korea (Feb 1979)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Foreign Service Programme",
+                    "value": "University of Oxford, U.K. (Jun 1983)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Career",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Minister of Foreign Affairs",
+                    "value": "Republic of Korea, South Korea (Jan 2024 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Permanent Representative to the United Nations",
+                    "value": "Republic of Korea, New York, USA (2016 - 2019)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Second Vice Minister of Foreign Affairs",
+                    "value": "Republic of Korea, South Korea (2013 - 2016)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ambassador for Development Cooperation",
+                    "value": "Ministry of Foreign Affairs, South Korea (2011 - 2012)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Deputy Minister for Trade",
+                    "value": "Ministry of Foreign Affairs and Trade, South Korea (2006 - 2008)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ambassador to Spain",
+                    "value": "Republic of Korea, Spain (2008 - 2011)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ambassador to the Korean Permanent Mission at the UN Office in Geneva",
+                    "value": "Geneva, Switzerland (2005 - 2006)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Director-General of Bilateral Trade Bureau",
+                    "value": "Ministry of Foreign Affairs and Trade, South Korea (2003 - 2005)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Deputy Director-General for Trade Policy Planning",
+                    "value": "Ministry of Foreign Affairs and Trade, South Korea (2002 - 2003)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Chairman of the WTO Dispute Panel",
+                    "value": "World Trade Organization, Geneva, Switzerland (Dates not specified)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Appointments",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Ambassador for International Relations",
+                    "value": "Gyeonggi Province, South Korea (2012 - 2013)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Reference",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Wikipedia - Cho Tae-yul",
+                    "value": "https://en.wikipedia.org/wiki/Cho_Tae-yong",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Bloomberg Profile",
+                    "value": "https://www.bloomberg.com/profile/person/16365197",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ministry of Foreign Affairs, Republic of Korea",
+                    "value": "https://www.mofa.go.kr/eng/wpge/m_24811/contents.do",
+                    "type": "TXT"
+                },
+                {
+                    "name": "CSIS Analysis on Cho Tae-yul",
+                    "value": "https://www.csis.org/analysis/impact-player-cho-tae-yul",
+                    "type": "TXT"
+                }
+            ]
+        }
+    ]
+}
