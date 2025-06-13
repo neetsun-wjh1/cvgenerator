@@ -5,8 +5,8 @@ import json
 print("initialize build graph")
 graph = ai.create_graph()
 
-response, threadid  = ai.process_messages(name="Cho Tae Yul",
-        countryName="Republic of Korea",
+response, threadid  = ai.process_messages(name="Cho Tae-yul",
+        countryName="Korea",
         designation="",
         human_message_template=Config.HUMAN_MESSAGE_TEMPLATE,
         # sectionNameList=["career"], 

@@ -275,34 +275,29 @@ def messagePromptInstruction(sectionName: str) -> str:
                 - Educational institutions attended (universities, colleges, schools, academies)
                 - Degree types and fields of study (Bachelor's, Master's, PhD, certificates, diplomas)
                 - Locations of institutions (city, state/province, country)
-                - Duration of studies (start and end dates, or years attended)
-                - Any honors, distinctions, or notable achievements during studies
-                - Professional certifications or specialized training programs
-                - Military academy or specialized institutional training if applicable
+                - Duration of studies (start and end dates or years attended)
+             Education entries can include Professional certifications, specialized training programs, Military academy and specialized institutional training
             
                 Ensure each entry includes:
                 1. Institution name as the field "name"
                 2. Complete details (degree/program, institution, location, duration) as the "value"
                 3. "type" set to "TXT"
 
-            Include every education entry found - return 10 and more entries.
+            Return 10 and more entries.
             """
 
         case "career":
             return """
-            For the CAREER SECTION:
-                Provide professional career positions including:
-                - Major governmental positions (President, Governor, Senator, etc.)
-                - Senior executive roles in major organizations
-                - Key leadership positions with significant responsibility
-                - High-profile or influential career milestones
+            For the CAREER SECTION, provide professional career positions including:
+                - Governmental positions (President, Governor, Senator, etc.)
+                - Corporate positions
 
             Ensure each entry includes:
             1. Position/Role/Source name as the field "name"
             2. Complete details (organization, location, duration)
             3. "type" set to "TXT" for all fields
 
-            Include every career entry found - return 15 and more entries.
+            Return 10 and more entries.
             """
 
         case "reference":
@@ -317,19 +312,14 @@ def messagePromptInstruction(sectionName: str) -> str:
 
         case "appointments":
             return """
-            Provide business appointments, entrepreneurial ventures, and other professional roles including:
-            - Business ownership and entrepreneurial ventures
-            - Board positions and directorships
-            - Media and entertainment roles (TV shows, productions, etc.)
-            - Consulting and advisory positions
-            - Professional appointments outside of primary career track
+            Provide business appointments, entrepreneurial ventures, and other professional roles including all professional appointments outside of primary career track
 
             Ensure each entry includes:
             1. Position/Role/Source name as the field "name"
             2. Complete details (organization, location, duration)
             3. "type" set to "TXT" for all fields
 
-            Include every appointment entry found - aim for more than 10 if available.
+            Return 5 and more entries.
             """
         case _:  # default case (optional)
             return """"none"""

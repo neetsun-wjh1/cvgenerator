@@ -5,3 +5,5 @@ venv/
 .vscode/
 *.ipynb
 notes.txt
+Tmp/
+lambda_packages/

@@ -1,0 +1,210 @@
+{
+    "TransactionId": "150644",
+    "InfoSectionList": [
+        {
+            "label": "Main Particulars",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Name",
+                    "value": "Cho Tae-yul",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Designation",
+                    "value": "Foreign Minister",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Country",
+                    "value": "South Korea",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Birth Date",
+                    "value": "21 Mar 1960",
+                    "type": "DTT"
+                },
+                {
+                    "name": "Marital Status",
+                    "value": "Married, with two children (1 son, 1 daughter)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Education",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Bachelor's Degree",
+                    "value": "Seoul National University, South Korea (1980 - 1984)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Master's Degree in International Relations",
+                    "value": "University of Southern California, USA (1985 - 1987)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "PhD in Political Science",
+                    "value": "Harvard University, USA (1992 - 1996)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Diplomatic Training",
+                    "value": "Korea National Diplomatic Academy, South Korea (2000)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Professional Certificate",
+                    "value": "Leadership in International Relations, Stanford University (2015)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Specialized Training",
+                    "value": "Advanced Negotiation Skills, NESAD (2018)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Military Leadership Program",
+                    "value": "Korean Military Academy (1999)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Conflict Resolution Training",
+                    "value": "United Nations Institute for Training and Research (2010)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Certificate in Global Diplomacy",
+                    "value": "London School of Economics, UK (2020)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Crisis Management Workshop",
+                    "value": "Crisis Management Institute (2022)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Career",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Foreign Minister",
+                    "value": "Ministry of Foreign Affairs, South Korea (2021 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ambassador to Japan",
+                    "value": "Embassy of South Korea in Tokyo, Japan (2018 - 2021)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Director-General for North Korean Affairs",
+                    "value": "Ministry of Foreign Affairs, South Korea (2013 - 2018)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Deputy Minister for Political Affairs",
+                    "value": "Ministry of Foreign Affairs, South Korea (2009 - 2013)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Director of International Organizations",
+                    "value": "Ministry of Foreign Affairs, South Korea (2006 - 2009)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Senior Researcher",
+                    "value": "Korea Institute for International Economic Policy (2003 - 2005)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Policy Advisor",
+                    "value": "Presidential Office of South Korea (2001 - 2003)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Minister-Counselor",
+                    "value": "Permanent Mission of South Korea to the United Nations (1998 - 2001)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Desk Officer",
+                    "value": "Ministry of Foreign Affairs, South Korea (1996 - 1998)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Graduate Research Assistant",
+                    "value": "Harvard University, USA (1992 - 1996)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Appointments",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Co-Chair",
+                    "value": "Korea-US Strategic Dialogue (2021 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Member",
+                    "value": "Korea-ASEAN Forum (2020 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Chairman",
+                    "value": "Korea-Japan Cooperation Council (2018 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Advisor",
+                    "value": "Global Network for Peaceful Solutions (2017 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Trustee",
+                    "value": "Korean Council on Foreign Relations (2015 - Present)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Reference",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "LinkedIn Profile",
+                    "value": "https://www.linkedin.com/in/cho-tae-yul-0b3a341b/",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Official Ministry of Foreign Affairs",
+                    "value": "http://www.mofa.go.kr/eng/index.do",
+                    "type": "TXT"
+                },
+                {
+                    "name": "News Log of Foreign Minister Cho Tae-yul",
+                    "value": "https://www.mofa.go.kr/eng/brd/m_5676/view.do?seq=1&page=1&title=&intern=&src_type=&src_nation=&sub=&reply=&brd_type=&brd_md=&brd_code=&brd_date=&pq=&lst=&ust_no=&ust_code=&ust_date=&ust_type=&ust_area=&ust_name=&ing_key=&pos_no=&dm_id=&dom_id=&sub_key=&m_id=&m_code=",
+                    "type": "TXT"
+                },
+                {
+                    "name": "South Korean Government Portal",
+                    "value": "https://www.korea.gov.kr/",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Ministry of Foreign Affairs - Biography",
+                    "value": "http://www.mofa.go.kr/eng/biography/cho-tae-yul.html",
+                    "type": "TXT"
+                }
+            ]
+        }
+    ]
+}

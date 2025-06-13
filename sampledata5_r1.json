@@ -1,0 +1,125 @@
+{
+    "TransactionId": "21667",
+    "InfoSectionList": [
+        {
+            "label": "Main Particulars",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Name",
+                    "value": "Joseph Beti Assomo",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Designation",
+                    "value": "Minister Delegate at the Presidency in charge of Defense",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Country",
+                    "value": "Cameroon",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Birth Date",
+                    "value": "17 Aug 1959",
+                    "type": "DTT"
+                },
+                {
+                    "name": "Marital Status",
+                    "value": "Married with children",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Education",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Bachelor's in General Administration",
+                    "value": "University of Yaound\u00e9, Cameroon (1977 - 1981)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Secondary Education",
+                    "value": "Akonolinga Mixed Government High School, Cameroon (Year unknown)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Primary Education",
+                    "value": "Ayos Government School, Cameroon (Year unknown)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Career",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Minister Delegate at the Presidency in charge of Defense",
+                    "value": "Government of Cameroon, Cameroon (2015 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Governor of Littoral Region",
+                    "value": "Government of Cameroon, Cameroon (2012 - 2015)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Governor of Far North Region",
+                    "value": "Government of Cameroon, Cameroon (2010 - 2012)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Head of the cabinet of Governor of South Region",
+                    "value": "Government of Cameroon, Cameroon (1983 - Year unknown)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Appointments",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Minister Delegate",
+                    "value": "Presidency of the Republic of Cameroon, Cameroon (2015 - Present)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Governor",
+                    "value": "Littoral Region, Cameroon (2012 - 2015)",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Governor",
+                    "value": "Far North Region, Cameroon (2010 - 2012)",
+                    "type": "TXT"
+                }
+            ]
+        },
+        {
+            "label": "Reference",
+            "type": "TAB",
+            "fields": [
+                {
+                    "name": "Minister of Defense Biography",
+                    "value": "https://mindef.gov.cm/en/le_mindef/",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Wikipedia - Joseph Beti Assomo",
+                    "value": "https://en.wikipedia.org/wiki/Joseph_Beti_Assomo",
+                    "type": "TXT"
+                },
+                {
+                    "name": "Jeune Afrique Article",
+                    "value": "https://www.jeuneafrique.com/1269875/politique/cameroun-qui-est-joseph-beti-assomo-lhomme-auquel-paul-biya-a-confie-la-defense/",
+                    "type": "TXT"
+                }
+            ]
+        }
+    ]
+}
