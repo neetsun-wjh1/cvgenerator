@@ -7,3 +7,4 @@ venv/
 notes.txt
 Tmp/
 lambda_packages/
+*.log

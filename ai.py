@@ -21,10 +21,30 @@ import random
 
 # Parse LLM output
 from pydantic import BaseModel, Field, field_validator
-from typing import List, Optional,  Dict, Any
+from typing import List, Optional, Dict, Any
 from langchain_core.output_parsers.pydantic import PydanticOutputParser
 from langchain_core.prompts.chat import HumanMessagePromptTemplate
 import json
+
+#Logging
+import logging
+import sys
+import customLogging
+import time
+
+#logging config
+# Configure logging with timestamp
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%d-%m-%Y %H:%M:%S',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('assistant.log')
+    ]
+)
+
+logger = logging.getLogger(__name__)
 
 # Pydantic models to represent the data structure
 class Field(BaseModel):
@@ -206,7 +226,7 @@ def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=None, model_na
         # openai_api_base=api_base or "https://litellm.govtext.gov.sg/",
         openai_api_base=api_base or "https://llmaas.govtext.gov.sg/gateway",
         model=model_name or "gpt-4o-mini-prd-gcc2-lb",
-        temperature=0
+        temperature=0,
     )
     
     if tools:
@@ -214,25 +234,36 @@ def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=None, model_na
     
     return model
 
-def create_assistant_node(model_with_tools, system_message=SystemMessage(content=Config.SYSTEM_CONTENT)):
+#Create Assistant Node
+def create_assistant_node(model_with_tools, system_message=SystemMessage(content=Config.SYSTEM_CONTENT),throttleSec=Config.THROTTLESPEED):
     """
     Create assistant node function for the graph
     
     Args:
         model_with_tools: Chat model with tools bound
         system_message: Optional system message to prepend
-    
+        enable_streaming: Whether to enable streaming output
     Returns:
         function: Assistant node function
     """
     def assistant(state: MessagesState):
         messages = state['messages']
         
-        # Optionally prepend system message
-        if system_message:
-            messages = [system_message] + messages
-            
-        return {"messages": [model_with_tools.invoke(messages)]}
+        # Log incoming request with timestamp
+        logger.info(f"Assistant node called with {len(messages)} messages")
+        # if messages:
+        #     safe_message = customLogging.safe_log_text(messages[-1].content, max_length=1000)
+        #     logger.info(f"Last message: {safe_message}")
+        # else:
+        #     logger.info("Last message: No messages")
+        if len(messages) > 2:
+            logger.info(f"Sleeping {throttleSec} seconds before invoking model")
+            time.sleep(throttleSec)
+        logger.info("Invoking model (non-streaming)")
+        response = model_with_tools.invoke(messages)
+        logger.info(f"Model response received: {response.content[:500]}......")
+        return {"messages": [response]}
+        # return {"messages": [model_with_tools.invoke(messages)]}
     
     return assistant
 
@@ -240,7 +271,13 @@ def create_assistant_node(model_with_tools, system_message=SystemMessage(content
 
 # %%
 # build graph
+
+from datetime import datetime
+
 def build_graph(assistant_node, tavily_search_tool, use_memory=True):
+
+    logger.info("Building graph...")
+
     graph_builder = StateGraph(MessagesState)
     graph_builder.add_node('assistant', assistant_node)
     graph_builder.add_node('tools', ToolNode(tavily_search_tool))
@@ -255,6 +292,8 @@ def build_graph(assistant_node, tavily_search_tool, use_memory=True):
     #add memory
     memory = MemorySaver() if use_memory else None
     graph = graph_builder.compile(checkpointer=memory)
+    logger.info("Graph compilation completed")
+
     return graph
 
 
@@ -326,7 +365,7 @@ def messagePromptInstruction(sectionName: str) -> str:
         case _:  # default case (optional)
             return """"none"""
 
-def process_messages(name=None, countryName=None, designation="", transaction_id="",
+def process_messages(name=None, countryName=None, designation="", transaction_id="", system_content_template=Config.SYSTEM_CONTENT,
                     human_message_template=Config.HUMAN_MESSAGE_TEMPLATE, sectionNameList=["main_particulars","education","career","appointments","reference"], 
                     graph=None):
 
@@ -348,19 +387,37 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
     print(f"Generated full human message: {human_message}")
 
     if transaction_id == "":
-        print("No transaction id is given.  To generate a transaction id. ")
+        logger.info("No transaction id is given.  To generate a transaction id. ")
         thread_id = str(random.randint(1, 1000000))
-        
+        logger.info(f"Generated Transaction ID is {transaction_id}")
     else:
-        print(f"Transaction ID is {transaction_id}")
+        logger.info(f"Transaction ID is {transaction_id}")
         thread_id = transaction_id
 
     thread = {"configurable": {"thread_id": thread_id}}
 
-    print(f"Invoke graph with human message and threadID {thread_id}")
+    # Check if this is a new thread and initialize if needed
+    try:
+        state = graph.get_state(thread)
+        if not state.values.get('messages'):
+            # New thread - initialize with system message
+            logger.info(f"Initializing new thread {thread_id} with system message")
+            graph.update_state(thread, {"messages": [SystemMessage(content=system_content_template)]})
+        else:
+            logger.info(f"Thread {thread_id} already has {len(state.values['messages'])} messages")
+    except Exception as e:
+        # Thread doesn't exist or error occurred - initialize with system message
+        logger.info(f"Thread {thread_id} doesn't exist or error occurred: {e}")
+        logger.info(f"Creating and initializing thread {thread_id}")
+        graph.update_state(thread, {"messages": [SystemMessage(content=Config.SYSTEM_CONTENT)]})
+
+
+    logger.info(f"Invoke graph with human message and threadID {thread_id}")
     messages = graph.invoke({"messages": [human_message]}, thread)
+    logger.info("=== Full list of messages ===")
+    # logger.info(messages['messages'][-1].pretty_print())
     for m in messages['messages']:
-        m.pretty_print()
+        logger.info(m)
 
     formatMsg = embed_in_transaction_format(messages['messages'][-1].content, thread_id)
     return formatMsg, thread_id
@@ -376,7 +433,7 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
 
 def create_graph():
 
-    print("Initialize Tavily Tool")
+    logger.info("Initialize Tavily Tool")
     # 1. Initialize tools
     tavily_search_tool, tavily_extract_tool = initialize_tavily_tools(
         max_results=Config.TAVILY_MAXSEARCH,
@@ -384,22 +441,22 @@ def create_graph():
     )
     
     # 2. Initialize model
-    print("Initialize Chat Model")
+    logger.info("Initialize Chat Model")
     model_with_tools = initialize_chat_model(
         api_key=LLMAAS_OPENAI_API_KEY,
         tools=[tavily_search_tool]
     )
     
     # 3. Create system message
-    print("Initialize System Message")
+    logger.info("Initialize System Message")
     system_message = SystemMessage(content=Config.SYSTEM_CONTENT)
     
     # 4. Create assistant node
-    print("Create assistant node")
+    logger.info("Create assistant node")
     assistant_node = create_assistant_node(model_with_tools, system_message)
     
     # 5. Build graph
-    print("Build graph")
+    logger.info("Build graph")
     graph= build_graph(assistant_node, [tavily_search_tool])
 
     return graph

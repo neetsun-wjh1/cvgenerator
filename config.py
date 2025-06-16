@@ -18,3 +18,4 @@ class Config:
     """
     TAVILY_MAXSEARCH=7
     TAVILY_SEARCHTOPIC="general"
+    THROTTLESPEED=12
