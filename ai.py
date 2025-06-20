@@ -208,7 +208,7 @@ def initialize_tavily_tools(max_results=Config.TAVILY_MAXSEARCH, search_topic=Co
     
     return tavily_search_tool, tavily_extract_tool
 
-def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=None, model_name=None, tools=None):
+def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=Config.LLMAAS_BASEURL, model_name=Config.LLMAAS_MODELNAME, tools=None, temperature=Config.LLM_TEMPERATURE):
     """
     Initialize ChatOpenAI model with optional tools binding
     
@@ -223,10 +223,9 @@ def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=None, model_na
     """
     model = ChatOpenAI(
         api_key=api_key,
-        # openai_api_base=api_base or "https://litellm.govtext.gov.sg/",
-        openai_api_base=api_base or "https://llmaas.govtext.gov.sg/gateway",
+        openai_api_base=api_base,
         model=model_name or "gpt-4o-mini-prd-gcc2-lb",
-        temperature=0,
+        temperature=0 or temperature,
     )
     
     if tools:
@@ -367,7 +366,7 @@ def messagePromptInstruction(sectionName: str) -> str:
 
 def process_messages(name=None, countryName=None, designation="", transaction_id="", system_content_template=Config.SYSTEM_CONTENT,
                     human_message_template=Config.HUMAN_MESSAGE_TEMPLATE, sectionNameList=["main_particulars","education","career","appointments","reference"], 
-                    graph=None):
+                    graph=None, threadId=None):
 
     sectionInstructions = [messagePromptInstruction(sectionName) for sectionName in sectionNameList]
     output_format = sections_to_json(sectionName for sectionName in sectionNameList)
@@ -446,6 +445,11 @@ def create_graph():
         api_key=LLMAAS_OPENAI_API_KEY,
         tools=[tavily_search_tool]
     )
+    # model_with_tools = initialize_chat_model(
+    #     api_key=OPENAI_API_KEY,
+    #     tools=[tavily_search_tool],
+    #     model_name="gpt-4o-mini"
+    # )
     
     # 3. Create system message
     logger.info("Initialize System Message")
