@@ -1,8 +1,8 @@
 # %%
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv("env")
+# load_dotenv("env")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 LLMAAS_OPENAI_API_KEY = os.getenv("LLMAAS_OPENAI_API_KEY")
