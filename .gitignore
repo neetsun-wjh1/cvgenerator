@@ -6,6 +6,6 @@ venv/
 *.ipynb
 notes.txt
 Tmp/
-lambda_packages/
+lambda-packages/
 *.log
 *.zip

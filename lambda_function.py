@@ -2,10 +2,6 @@ import json
 import logging
 import ai
 from config import Config
-import sys
-
-# Add lambda_packages to Python path
-sys.path.insert(0, '/var/task/lambda_packages')
 
 # Set up logging
 logger = logging.getLogger()
