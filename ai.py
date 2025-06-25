@@ -3,9 +3,9 @@ import os
 # from dotenv import load_dotenv
 
 # load_dotenv("env")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
-LLMAAS_OPENAI_API_KEY = os.getenv("LLMAAS_OPENAI_API_KEY")
+# OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
+LLMAAS_OPENAI_API_KEY = os.environ.get("LLMAAS_OPENAI_API_KEY")
 
 # %%
 from config import Config

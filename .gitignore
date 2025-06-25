@@ -1,11 +1,10 @@
 __pycache__/
 *.pyc
 .env
-venv/
+.venv/
 .vscode/
 *.ipynb
 notes.txt
 Tmp/
-lambda-packages/
+python/
 *.log
-*.zip
