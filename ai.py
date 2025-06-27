@@ -27,24 +27,12 @@ from langchain_core.prompts.chat import HumanMessagePromptTemplate
 import json
 
 #Logging
-import logging
-import sys
 import customLogging
+
+#For Throttling
 import time
 
-#logging config
-# Configure logging with timestamp
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%d-%m-%Y %H:%M:%S',
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('assistant.log')
-    ]
-)
-
-logger = logging.getLogger(__name__)
+logger = customLogging.safe_logger_setup()
 
 # Pydantic models to represent the data structure
 class Field(BaseModel):

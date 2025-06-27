@@ -66,10 +66,10 @@ def test_valid_request():
     print("🧪 Testing valid request...")
     
     test_data = {
-        'name': 'John Doe',
-        'country': 'United States',
-        'designation': 'Software Engineer',
-        'transactionId': 'TXN-12345'
+        "name": "Cho Tae-yul",
+        "country": "Korea",
+        "designation": "",
+        "transactionId": "TXN-12345"
     }
     
     event = create_mock_event('POST', test_data)
@@ -77,16 +77,16 @@ def test_valid_request():
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def test_missing_fields():
     """Test with missing required fields"""
-    print("\n🧪 Testing missing required fields...")
+    print("\nTesting missing required fields...")
     
     test_data = {
         'name': 'John Doe',
@@ -98,64 +98,64 @@ def test_missing_fields():
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def test_invalid_method():
     """Test with invalid HTTP method"""
-    print("\n🧪 Testing invalid HTTP method...")
+    print("\nTesting invalid HTTP method...")
     
     event = create_mock_event('GET')  # Should only accept POST
     context = create_mock_context()
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def test_invalid_json():
     """Test with invalid JSON"""
-    print("\n🧪 Testing invalid JSON...")
+    print("\nTesting invalid JSON...")
     
     event = create_mock_event('POST', '{"invalid": json}')  # Invalid JSON
     context = create_mock_context()
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def test_empty_body():
     """Test with empty body"""
-    print("\n🧪 Testing empty body...")
+    print("\nTesting empty body...")
     
     event = create_mock_event('POST')  # No body
     context = create_mock_context()
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def interactive_test():
     """Interactive test mode - enter your own data"""
-    print("\n🎮 Interactive Test Mode")
+    print("\nInteractive Test Mode")
     print("Enter the test data (or press Enter to skip):")
     
     name = input("Name: ").strip()
@@ -177,23 +177,23 @@ def interactive_test():
     if transaction_id:
         test_data['transactionId'] = transaction_id
     
-    print(f"\n🧪 Testing with your data: {json.dumps(test_data, indent=2)}")
+    print(f"\nTesting with your data: {json.dumps(test_data, indent=2)}")
     
     event = create_mock_event('POST', test_data)
     context = create_mock_context()
     
     try:
         response = lambda_handler(event, context)
-        print(f"✅ Status Code: {response['statusCode']}")
-        print(f"📄 Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
+        print(f"Status Code: {response['statusCode']}")
+        print(f"Response Body: {json.dumps(json.loads(response['body']), indent=2)}")
         return response
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return None
 
 def main():
     """Run all tests"""
-    print("🚀 Starting Lambda Function Local Tests")
+    print("Starting Lambda Function Local Tests")
     print("=" * 50)
     
     # Run automated tests
@@ -207,9 +207,9 @@ def main():
     try:
         interactive_test()
     except KeyboardInterrupt:
-        print("\n🛑 Interactive test cancelled by user")
+        print("\nInteractive test cancelled by user")
     
-    print("\n✨ All tests completed!")
+    print("\nAll tests completed!")
 
 if __name__ == '__main__':
     main()

@@ -1,11 +1,10 @@
 import json
-import logging
+import customLogging
 import ai
 from config import Config
 
 # Set up logging
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger = customLogging.safe_logger_setup()
 
 def validate_request_body(body):
     """

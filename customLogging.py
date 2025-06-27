@@ -1,3 +1,6 @@
+import logging
+import sys
+
 def safe_log_text(text, max_length=500):
     """
     Safely prepare text for logging by handling Unicode and length
@@ -42,7 +45,9 @@ def safe_logger_setup():
         datefmt='%Y-%m-%d %H:%M:%S',
         handlers=[
             logging.StreamHandler(sys.stdout),
-            logging.FileHandler('assistant.log', encoding='utf-8')
+            # logging.FileHandler('assistant.log', encoding='utf-8')
         ],
         force=True  # Override existing configuration
     )
+
+    return logging.getLogger()
