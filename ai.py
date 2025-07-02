@@ -142,7 +142,7 @@ def create_section_data(sections: List[str]) -> List[Dict[str, Any]]:
             result.append(section_templates[section_name])
         else:
             available_sections = list(section_templates.keys())
-            print(f"Warning: Section '{section_name}' not found. Available sections: {available_sections}")
+            logger.info(f"Warning: Section '{section_name}' not found. Available sections: {available_sections}")
 
     return result
 
@@ -358,7 +358,7 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
 
     sectionInstructions = [messagePromptInstruction(sectionName) for sectionName in sectionNameList]
     output_format = sections_to_json(sectionName for sectionName in sectionNameList)
-    print(f"Output format of the human message: {output_format}")
+    logger.info(f"Output format of the human message: {output_format}")
 
     formatted_human_message_template = human_message_template.format(
         name=name,
@@ -371,7 +371,7 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
     # Create the message objects
 
     human_message = HumanMessage(content=formatted_human_message_template)
-    print(f"Generated full human message: {human_message}")
+    logger.info(f"Generated full human message: {human_message}")
 
     if transaction_id == "":
         logger.info("No transaction id is given.  To generate a transaction id. ")
