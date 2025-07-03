@@ -88,7 +88,7 @@ def process_person_data(request_body):
         return response
     
     except Exception as e:
-        logger.error(f"Error processing person data: {str(e)}")
+        logger.error(f"Error processing person data {request_body}: {str(e)}")
         raise Exception(f"Failed to process person data: {str(e)}")
 
 def context_timestamp():
@@ -103,60 +103,9 @@ def lambda_handler(event, context):
     
     try:
         # Log the incoming event for debugging
-        logger.info(f"Received event: {json.dumps(event)}")
+        logger.info(f"Received event: {event}")
         
-        # Only handle POST requests
-        http_method = event.get('httpMethod', '')
-        if http_method != 'POST':
-            return {
-                'statusCode': 405,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({
-                    'error': 'Method not allowed. Only POST requests are supported.'
-                })
-            }
-        
-        # Check if body exists
-        if not event.get('body'):
-            return {
-                'statusCode': 400,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({
-                    'error': 'Request body is required'
-                })
-            }
-        
-        # Parse JSON body
-        try:
-            body_content = event['body']
-            
-            # Handle base64 encoded body if necessary
-            if event.get('isBase64Encoded', False):
-                import base64
-                body_content = base64.b64decode(body_content).decode('utf-8')
-            
-            request_body = json.loads(body_content)
-            logger.info(f"Parsed request body: {request_body}")
-            
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse JSON body: {str(e)}")
-            return {
-                'statusCode': 400,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'body': json.dumps({
-                    'error': 'Invalid JSON format in request body',
-                    'message': str(e)
-                })
-            }
+        request_body = event
         
         # Validate and process the request body
         validation_result = validate_request_body(request_body)

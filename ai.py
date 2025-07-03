@@ -32,6 +32,12 @@ import customLogging
 #For Throttling
 import time
 
+#For Statistics
+import ai_counter
+
+# Initialize global tracker
+usage_tracker = ai_counter.UsageTracker()
+
 logger = customLogging.safe_logger_setup()
 
 # Pydantic models to represent the data structure
@@ -189,6 +195,7 @@ def initialize_tavily_tools(max_results=Config.TAVILY_MAXSEARCH, search_topic=Co
     tavily_search_tool = TavilySearch(
         max_results=max_results or 5,  # Default to 5 if not provided
         topic=search_topic or "general",  # Default topic
+        summarize=True,  # Enable summarization
     )
     
     # Initialize Tavily Extract Tool
@@ -222,7 +229,7 @@ def initialize_chat_model(api_key=LLMAAS_OPENAI_API_KEY, api_base=Config.LLMAAS_
     return model
 
 #Create Assistant Node
-def create_assistant_node(model_with_tools, system_message=SystemMessage(content=Config.SYSTEM_CONTENT),throttleSec=Config.THROTTLESPEED):
+def create_assistant_node(model_with_tools, system_message=SystemMessage(content=Config.SYSTEM_CONTENT),throttleSec=Config.THROTTLESPEED,model_name="gpt4omini"):
     """
     Create assistant node function for the graph
     
@@ -238,16 +245,44 @@ def create_assistant_node(model_with_tools, system_message=SystemMessage(content
         
         # Log incoming request with timestamp
         logger.info(f"Assistant node called with {len(messages)} messages")
-        # if messages:
-        #     safe_message = customLogging.safe_log_text(messages[-1].content, max_length=1000)
-        #     logger.info(f"Last message: {safe_message}")
-        # else:
-        #     logger.info("Last message: No messages")
+        if messages:
+            safe_message = customLogging.safe_log_text(messages[-1].content)
+            logger.info(f"Last message: {safe_message}")
+        else:
+            logger.info("Last message: No messages")
+
+        # Count input tokens
+        input_tokens =ai_counter.count_messages_tokens(messages, model_name)
+
+        # Add system message tokens if present
+        if system_message:
+            input_tokens += ai_counter.count_tokens(system_message.content, model_name)
+
         if len(messages) > 2:
             logger.info(f"Sleeping {throttleSec} seconds before invoking model")
             time.sleep(throttleSec)
+
         logger.info("Invoking model (non-streaming)")
+
+        # Increment request counter
+        usage_tracker.increment_request()
+
         response = model_with_tools.invoke(messages)
+
+        # Count output tokens
+        output_tokens = ai_counter.count_tokens(response.content, model_name)
+
+        # Update token counters
+        usage_tracker.add_tokens(input_tokens, output_tokens)
+
+        # Log usage statistics
+        current_stats = usage_tracker.get_stats()
+        logger.info(f"Current request - Input tokens: {input_tokens}, Output tokens: {output_tokens}")
+        logger.info(f"Total usage - Requests: {current_stats['total_requests']}, "
+                   f"Input tokens: {current_stats['total_input_tokens']}, "
+                   f"Output tokens: {current_stats['total_output_tokens']}, "
+                   f"Total tokens: {current_stats['total_tokens']}")
+
         logger.info(f"Model response received: {response.content[:500]}......")
         return {"messages": [response]}
         # return {"messages": [model_with_tools.invoke(messages)]}
@@ -354,7 +389,7 @@ def messagePromptInstruction(sectionName: str) -> str:
 
 def process_messages(name=None, countryName=None, designation="", transaction_id="", system_content_template=Config.SYSTEM_CONTENT,
                     human_message_template=Config.HUMAN_MESSAGE_TEMPLATE, sectionNameList=["main_particulars","education","career","appointments","reference"], 
-                    graph=None, threadId=None):
+                    graph=None):
 
     sectionInstructions = [messagePromptInstruction(sectionName) for sectionName in sectionNameList]
     output_format = sections_to_json(sectionName for sectionName in sectionNameList)
@@ -362,7 +397,7 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
 
     formatted_human_message_template = human_message_template.format(
         name=name,
-        countryName= countryName,
+        countryName=countryName,
         designation=designation,
         sectionInstructions=sectionInstructions,
         output_format=output_format
@@ -398,8 +433,10 @@ def process_messages(name=None, countryName=None, designation="", transaction_id
         logger.info(f"Creating and initializing thread {thread_id}")
         graph.update_state(thread, {"messages": [SystemMessage(content=Config.SYSTEM_CONTENT)]})
 
-
     logger.info(f"Invoke graph with human message and threadID {thread_id}")
+
+    
+
     messages = graph.invoke({"messages": [human_message]}, thread)
     logger.info("=== Full list of messages ===")
     # logger.info(messages['messages'][-1].pretty_print())

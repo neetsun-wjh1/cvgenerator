@@ -1,7 +1,9 @@
 import logging
 import sys
+from datetime import datetime
 
-def safe_log_text(text, max_length=500):
+
+def safe_log_text(text, max_length=100000):
     """
     Safely prepare text for logging by handling Unicode and length
     
@@ -51,3 +53,8 @@ def safe_logger_setup():
     )
 
     return logging.getLogger()
+
+def generate_id(prefix=""):
+    now = datetime.now()
+    id_str = now.strftime("%d%m%Y%H%M%S") + f"{int(now.microsecond / 1000):03d}"
+    return prefix+"_"+id_str
