@@ -9,3 +9,4 @@ Tmp/
 python/
 *.log
 *.zip
+test_mergejson.py

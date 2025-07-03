@@ -18,7 +18,7 @@ class Config:
     """
     TAVILY_MAXSEARCH=7
     TAVILY_SEARCHTOPIC="general"
-    THROTTLESPEED=5
+    THROTTLESPEED=3  # seconds between requests
     LLM_TEMPERATURE=0
     LLMAAS_BASEURL="https://llmaas.govtext.gov.sg/gateway"
     LLMAAS_MODELNAME="gpt-4o-mini-prd-gcc2-lb"
