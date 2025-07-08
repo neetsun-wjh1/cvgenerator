@@ -1,4 +1,5 @@
 class Config:
+    LOCAL_TEST=True #Value is True for local test
     SYSTEM_CONTENT='''
         You are an intelligent assistant designed to help foreign service officers compile accurate CVs for diplomatic professionals.
         Your task is to use web search (Tavily tool) to gather updated and precise information based on the profile name, his country, and his designation (optional),
@@ -18,7 +19,7 @@ class Config:
     """
     TAVILY_MAXSEARCH=7
     TAVILY_SEARCHTOPIC="general"
-    THROTTLESPEED=3  # seconds between requests
+    THROTTLESPEED=1.5  # seconds between requests
     LLM_TEMPERATURE=0
     LLMAAS_BASEURL="https://llmaas.govtext.gov.sg/gateway"
     LLMAAS_MODELNAME="gpt-4o-mini-prd-gcc2-lb"

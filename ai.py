@@ -1,14 +1,16 @@
 # %%
+from config import Config
 import os
-# from dotenv import load_dotenv
 
-# load_dotenv("env")
+if Config.LOCAL_TEST:
+    from dotenv import load_dotenv
+    load_dotenv(".env")
+
 # OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
 LLMAAS_OPENAI_API_KEY = os.environ.get("LLMAAS_OPENAI_API_KEY")
 
 # %%
-from config import Config
 from langgraph.graph import MessagesState
 from langchain_tavily import TavilySearch, TavilyExtract
 from langchain_core.messages import HumanMessage, SystemMessage
