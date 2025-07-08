@@ -11,7 +11,7 @@ response, threadid  = ai.process_messages(name="Cho Tae-yul",
         designation="",
         human_message_template=Config.HUMAN_MESSAGE_TEMPLATE,
         # sectionNameList=["career"], 
-        sectionNameList=["main_particulars","education","career","appointments","reference"], 
+        sectionNameList=["main_particulars","education","career","appointments","languages","reference"], 
         # sectionNameList=["education","reference"], 
         graph=graph)
 jsonResponse = json.dumps(response)
